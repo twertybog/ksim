@@ -29,7 +29,7 @@ create-firefighters num-firefighters [
     set color white
   ]
 ```
-Після чого додамо їм можливість гасити червоні комірки та переміщатися тільки по чорним
+Після чого додамо їм можливість гасити червоні комірки та переміщатися тільки по чорним чи зеленим коміркам
 ```
 ask firefighters [
     let target-patch one-of neighbors
