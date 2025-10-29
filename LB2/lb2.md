@@ -17,8 +17,78 @@
 #### 1. Зміна моделі згідно завдання
 Додамо до нашої моделі пожежних які гаситимуть пожежу, відповідно це приведе до зміни з червоного на чорний [LB2.1](lb2_1.nlogox).
 
+Створимо пожежників
+```
+breed [ firefighters firefighter ]
+```
+Додамо їх створення на пустих комірках
+```
+create-firefighters num-firefighters [
+    move-to one-of patches with [pcolor = black]
+    set shape "person"
+    set color white
+  ]
+```
+Після чого додамо їм можливість гасити червоні комірки та переміщатися тільки по чорним
+```
+ask firefighters [
+    let target-patch one-of neighbors
+    let target-color [pcolor] of target-patch
+    
+    if (target-color = green) or (target-color = black) [
+      move-to target-patch
+    ]
+    
+    let fire-nearby one-of neighbors with [pcolor = red]
+    
+    ;; extinguishing a fire
+    if fire-nearby != nobody [
+      ask fire-nearby [
+        set pcolor black ;; make extinguished black
+      ]
+    ]
+  ]
+```
+
 #### 2. Зміна логіки моделі на власний розсуд
 Далі внесемо зміни до моделі зробивши, щоб у пожежників була обмежена кількість води [LB2.2](lb2_2.nlogox).
+
+Додамо воду
+```
+firefighters-own [
+  water
+]
+```
+
+Змінимо створення пожежників додавши до них воду
+```
+create-firefighters num-firefighters [
+    ...
+    set water initial-water
+  ]
+```
+
+Змінимо умову гасіння 
+```
+if fire-nearby != nobody and water > 0 [
+      ...
+      set water water - 1
+    ]
+```
+
+Те саме зробимо і для умови переміщення
+```
+ if ((target-color = green) or (target-color = black)) and water > 0 [
+      move-to target-patch
+    ]
+```
+
+І додамо перетворення білої клітинки на сіру коли закінчилась вода
+```
+if water <= 0 [
+      set color gray ;; grey if water empty
+    ]
+```
 
 #### 3. Проведемо обчислювальний експеримент
 Поглянемо, як зміниться площа вигорання в залежності від кількості пожежників та обмеження клітинок, які може загасити кожен із них.
