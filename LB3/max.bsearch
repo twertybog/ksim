@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE search SYSTEM "behaviorsearch.dtd">
+<search>
+    <bsearchVersionNumber>1.10</bsearchVersionNumber>
+    <modelInfo>
+        <modelFile>C:\Program Files\NetLogo 7.0.2\models\IABM Textbook\chapter 3\Fire Extensions\Fire Simple Extension 2.nlogox</modelFile>
+        <modelSetupCommands>setup</modelSetupCommands>
+        <modelStepCommands>go</modelStepCommands>
+        <modelStopCondition>all? patches [ pcolor != red ]</modelStopCondition>
+        <modelStepLimit>100</modelStepLimit>
+        <modelMetricReporter>count patches with [pcolor = red]</modelMetricReporter>
+        <modelMeasureIf>true</modelMeasureIf>
+    </modelInfo>
+    <fitnessInfo>
+        <fitnessMinimized>false</fitnessMinimized>
+        <fitnessCollecting>AT_FINAL_STEP</fitnessCollecting>
+        <fitnessSamplingReplications>10</fitnessSamplingReplications>
+        <fitnessCombineReplications>MEAN</fitnessCombineReplications>
+    </fitnessInfo>
+    <searchSpace>
+        <paramSpec>["density" [50 5 80]]</paramSpec>
+        <paramSpec>["probability-of-spread" [50 5 80]]</paramSpec>
+        <paramSpec>["south-wind-speed" [-25 5 25]]</paramSpec>
+        <paramSpec>["west-wind-speed" [-25 5 25]]</paramSpec>
+    </searchSpace>
+    <searchMethod type="RandomSearch"/>
+    <chromosomeRepresentation type="GrayBinaryChromosome"/>
+    <caching>true</caching>
+    <evaluationLimit>300</evaluationLimit>
+    <bestCheckingNumReplications>0</bestCheckingNumReplications>
+</search>
