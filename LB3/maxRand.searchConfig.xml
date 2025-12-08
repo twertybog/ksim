@@ -23,9 +23,15 @@
         <paramSpec>["south-wind-speed" [-25 5 25]]</paramSpec>
         <paramSpec>["west-wind-speed" [-25 5 25]]</paramSpec>
     </searchSpace>
-    <searchMethod type="RandomSearch"/>
+    <searchMethod type="StandardGA">
+        <searchMethodParameter name="mutation-rate" value="0.01"/>
+        <searchMethodParameter name="population-size" value="50"/>
+        <searchMethodParameter name="tournament-size" value="3"/>
+        <searchMethodParameter name="population-model" value="generational"/>
+        <searchMethodParameter name="crossover-rate" value="0.7"/>
+    </searchMethod>
     <chromosomeRepresentation type="GrayBinaryChromosome"/>
     <caching>true</caching>
-    <evaluationLimit>300</evaluationLimit>
+    <evaluationLimit>3000</evaluationLimit>
     <bestCheckingNumReplications>0</bestCheckingNumReplications>
 </search>
